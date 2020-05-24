@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
-import { DeepPartial, Repository } from 'typeorm';
+import { DeepPartial, Like, Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private usersRepository: Repository<User>
+    @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
   getNew(): User {
@@ -24,8 +24,14 @@ export class UsersService {
   findOneByLoginId(loginId: string): Promise<User> {
     return this.usersRepository.findOne(
       { loginId },
-      { relations: ['memberships'] }
+      { relations: ['memberships', 'memberships.section'] },
     );
+  }
+
+  search(query: string) {
+    return this.usersRepository.find({
+      where: [{ name: Like(`%${query}%`) }, { email: Like(`%${query}%`) }],
+    });
   }
 
   save(user: DeepPartial<User>): Promise<User> {

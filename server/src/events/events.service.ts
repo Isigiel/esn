@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 import { Event } from './event.entity';
 
 @Injectable()
 export class EventsService {
   constructor(
-    @InjectRepository(Event) private eventRepository: Repository<Event>
+    @InjectRepository(Event) private eventRepository: Repository<Event>,
   ) {}
 
-  findAll() {
+  findAll(): Promise<Event[]> {
     return this.eventRepository.find();
   }
 
-  findOneById(id: string) {
+  findOneById(id: string): Promise<Event> {
     return this.eventRepository.findOne(id);
   }
 
-  async create(eventData: any) {
+  create(eventData: DeepPartial<Event>): Promise<Event> {
     const event = this.eventRepository.create(eventData);
-    return await this.eventRepository.save(event);
+    return this.eventRepository.save(event);
   }
 }

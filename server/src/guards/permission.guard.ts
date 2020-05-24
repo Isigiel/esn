@@ -12,22 +12,22 @@ export class PermissionGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const permission = this.reflector.get<
+    const permission = this.reflector.getAllAndOverride<
       GlobalPermissions | SectionPermissions
-      >('permission', context.getHandler());
+    >('permission', [context.getHandler(), context.getClass()]);
     if (!permission) {
       return true;
     }
     const request = context.switchToHttp().getRequest();
     const user: User = request.profile;
+    if (!user || !user.permissions) return false;
     return isAllowed(
       [
         ...user.permissions,
-        ...(user.memberships.find(
-          (m) => m.section.shortCode === request.tennant
-        )?.permissions ?? []),
+        ...(user.memberships.find(m => m.section.shortCode === request.tenant)
+          ?.permissions ?? []),
       ],
-      permission
+      permission,
     );
   }
 }

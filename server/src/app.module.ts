@@ -1,9 +1,4 @@
-import {
-  HttpModule,
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-} from '@nestjs/common';
+import { HttpModule, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -14,6 +9,7 @@ import { ProfileMiddleware } from './middleware/profile.middleware';
 import { UsersModule } from './users/users.module';
 import { SectionsModule } from './sections/sections.module';
 import { EventsModule } from './events/events.module';
+import { MembershipsModule } from './memberships/memberships.module';
 
 @Module({
   imports: [
@@ -40,6 +36,7 @@ import { EventsModule } from './events/events.module';
     UsersModule,
     SectionsModule,
     EventsModule,
+    MembershipsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

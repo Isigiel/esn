@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { GlobalPermissions } from '@esn/shared/global-permissions';
-import { SectionMembership } from '../sections/section-membership.entity';
+import { SectionMembership } from '../memberships/section-membership.entity';
 
 @Entity()
 export class User {
@@ -34,6 +34,9 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany((type) => SectionMembership, (membership) => membership.user)
+  @OneToMany(
+    type => SectionMembership,
+    membership => membership.user,
+  )
   memberships: SectionMembership[];
 }

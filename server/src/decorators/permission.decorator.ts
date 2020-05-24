@@ -4,4 +4,4 @@ import { SectionPermissions } from '@esn/shared/section-permissions';
 import { PermissionGuard } from '../guards/permission.guard';
 
 export const Permission = (perm: GlobalPermissions | SectionPermissions) =>
-  applyDecorators(SetMetadata('permission', perm)/*, UseGuards(PermissionGuard)*/);
+  applyDecorators(SetMetadata('permission', perm), UseGuards(PermissionGuard));
