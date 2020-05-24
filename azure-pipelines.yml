@@ -1,0 +1,169 @@
+# Node.js Express Web App to Linux on Azure
+# Build a Node.js Express app and deploy it to Azure as a Linux web app.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  - master
+name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+variables:
+
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: 'tumi - Azure'
+
+  # Web app name
+  webAppName: 'esn'
+
+  # Environment name
+  environmentName: 'development'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+  # Used by chalk. Ensures output from Jest includes ANSI escape characters that are needed to match test snapshots.
+  FORCE_COLOR: 1
+
+  # Ensures the handful of tests that should be skipped during CI are
+  CI: true
+
+  YARN_CACHE_FOLDER: $(Pipeline.Workspace)/.yarn
+  npm_config_cache: $(Pipeline.Workspace)/.npm
+
+stages:
+  - stage: Build
+    displayName: Test and Build
+    jobs:
+      - job: Server
+        pool:
+          vmImage: $(vmImageName)
+
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '12.x'
+            displayName: 'Use Node.js 12'
+          - task: Cache@2
+            inputs:
+              key: 'npm | "$(Agent.OS)" | server/package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: $(npm_config_cache)
+            displayName: Cache npm
+
+          - script: npm ci
+            displayName: Install dependencies
+            workingDirectory: server
+          # - script: npm run test
+          #   displayName: 'Run tests'
+          - script: npm run build:ci
+            workingDirectory: server
+            displayName: 'Build project'
+          - script: node tools/copyPackage.js
+            workingDirectory: server
+            displayName: 'Move package file'
+          # - task: PublishTestResults@2
+          #   inputs:
+          #     testResultsFiles: '**/reports/junit/*.xml'
+          #     testRunTitle: 'CI Tests $(Agent.OS)'
+          #   displayName: 'Publish test results'
+          #   condition: succeededOrFailed()
+          - publish: $(System.DefaultWorkingDirectory)/server/dist
+            artifact: server
+      - job: Client
+        pool:
+          vmImage: $(vmImageName)
+
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '12.x'
+            displayName: 'Use Node.js 12'
+          - task: Cache@2
+            inputs:
+              key: 'yarn | "$(Agent.OS)" | client/yarn.lock'
+              restoreKeys: |
+                yarn | "$(Agent.OS)"
+              path: $(YARN_CACHE_FOLDER)
+            displayName: Cache Yarn packages
+          - script: yarn --frozen-lockfile
+            displayName: Install dependencies
+            workingDirectory: client
+          # - script: yarn test
+          #   displayName: 'Run tests'
+          - script: node tools/injectEnv.js
+            workingDirectory: client
+            env:
+              BUILD: $(Build.BuildNumber)
+            displayName: 'Read build environment'
+          - script: yarn build:prod
+            workingDirectory: client
+            displayName: 'Build project'
+          # - task: Cache@2
+          #   inputs:
+          #     key: 'ngcc | "$(Agent.OS)" | client/yarn.lock'
+          #     restoreKeys: |
+          #       ngcc | "$(Agent.OS)"
+          #     path: $(System.DefaultWorkingDirectory)/client/node_modules/.cache
+          #   displayName: Cache ivy entrypoints
+          # - task: PublishTestResults@2
+          #   inputs:
+          #     testResultsFiles: '**/reports/junit/*.xml'
+          #     testRunTitle: 'CI Tests $(Agent.OS)'
+          #   displayName: 'Publish test results'
+          #   condition: succeededOrFailed()
+          - publish: $(System.DefaultWorkingDirectory)/client/dist/client
+            artifact: client
+  - stage: Package
+    displayName: Azure Package
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: Package
+        pool:
+          vmImage: $(vmImageName)
+
+        steps:
+          - checkout: none  # Don't sync sources
+          - download: current
+            artifact: client
+          - download: current
+            artifact: server
+          - task: CopyFiles@2
+            inputs:
+              sourceFolder: $(Pipeline.Workspace)/client
+              targetFolder: $(Pipeline.Workspace)/server/client
+          - publish: $(Pipeline.Workspace)/server
+            artifact: drop
+          # - task: ArchiveFiles@2
+          #   displayName: 'Archive files'
+          #   inputs:
+          #     rootFolderOrFile: $(Pipeline.Workspace)/server
+          #     includeRootFolder: false
+          #     archiveType: zip
+          #     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+          #     replaceExistingArchive: true
+          # - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+          #   artifact: drop
+  - stage: Deploy
+    dependsOn: Package
+    condition: succeeded()
+    jobs:
+      - deployment: Deploy
+        environment: $(environmentName)
+        pool:
+          vmImage: $(vmImageName)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: drop
+                - task: AzureWebApp@1
+                  displayName: 'Azure Web App Deploy: '
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    appType: webAppLinux
+                    appName: $(webAppName)
+                    runtimeStack: 'NODE|12.9'
+                    package: $(Pipeline.Workspace)/drop
+#                    startUpCommand: 'node api/main.js'

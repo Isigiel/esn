@@ -5,4 +5,5 @@ CM_SCRIPT_GENERATOR_ARGS=--node
 SCM_DO_BUILD_DURING_DEPLOYMENT=true`;
 // jetpack.write('dist/package.json', ciPackage);
 jetpack.copy('package.json', 'dist/package.json');
+jetpack.copy('package-lock.json', 'dist/package-lock.json');
 jetpack.write('dist/.deployment', deployCommand);

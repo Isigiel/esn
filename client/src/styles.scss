@@ -1,0 +1,87 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$section-app-primary: mat-palette($mat-blue);
+$section-app-accent: mat-palette($mat-pink);
+
+// The warn palette is optional (defaults to red).
+$section-app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$section-app-theme: mat-light-theme($section-app-primary, $section-app-accent, $section-app-warn);
+$section-dark-theme: mat-dark-theme($section-app-primary, $section-app-accent, $section-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($section-app-theme);
+$foreground: map-get($section-app-theme, foreground);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-bottom-sheet-container {
+  border-radius: 1rem 1rem 0 0;
+  padding-top: 1rem !important;
+}
+
+mat-icon.mat-icon {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 32px !important;
+  line-height: 32px !important;
+
+  &[matDatepickerToggleIcon] {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 24px !important;
+    line-height: 24px !important;
+  }
+}
+
+esn-navigation-rail{
+  a {
+    text-decoration: none;
+    color: mat-color($foreground, text);
+
+    &.active {
+      color: mat-color($section-app-primary);
+    }
+  }
+}
+
+esn-navigation-sheet{
+  mat-nav-list.mat-nav-list {
+    .mat-list-item {
+      &.active {
+        background: mat-color($section-app-primary, default, .1);
+
+        &:focus, &:hover {
+          background: mat-color($section-app-primary, default, .2);
+        }
+
+        mat-icon {
+          color: mat-color($section-app-primary);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<mat-nav-list ngClass.lt-sm="mobile">
+  <a routerLink="admin" mat-list-item routerLinkActive="active">
+    <mat-icon svgIcon="icon-administrative-tools" mat-list-icon></mat-icon>
+    <h3 mat-line>Administration</h3>
+  </a>
+</mat-nav-list>
+<mat-divider></mat-divider>
+<mat-nav-list ngClass.lt-sm="mobile" *ngrxLet="loggedIn$ as authenticated">
+  <mat-list-item (click)="login()" *ngIf="!authenticated">
+    <mat-icon mat-list-icon svgIcon="icon-login-rounded-right"></mat-icon>
+    <h3 mat-line>Login</h3>
+  </mat-list-item>
+  <mat-list-item (click)="logout()" *ngIf="authenticated">
+    <mat-icon mat-list-icon svgIcon="icon-login-rounded-right"></mat-icon>
+    <h3 mat-line>Logout</h3>
+  </mat-list-item>
+</mat-nav-list>

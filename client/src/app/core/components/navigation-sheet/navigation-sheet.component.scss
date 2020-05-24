@@ -1,0 +1,19 @@
+mat-nav-list.mat-nav-list {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-right: 0.5rem;
+
+  .mat-list-item {
+    border-radius: 0 28px 28px 0;
+  }
+
+  &.mobile {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-right: 0;
+
+    a.mat-list-item {
+      border-radius: 0;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<mat-sidenav-container
+  [hasBackdrop]="false"
+  style="min-height: 100vh"
+  fxLayout="column"
+>
+  <mat-sidenav [fixedInViewport]="true" mode="over" [autoFocus]="false">
+    <div style="padding: 1rem; text-align: center">
+      <h1 class="title mat-display-3">esn<span>.world</span></h1>
+    </div>
+    <esn-navigation-sheet></esn-navigation-sheet>
+  </mat-sidenav>
+  <mat-sidenav-content
+    ngStyle.lt-sm="padding-bottom: 56px"
+    fxFlex="grow"
+    fxLayout="column"
+  >
+    <esn-navigation-rail
+      class="rail"
+      fxHide.lt-sm
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="1rem"
+    ></esn-navigation-rail>
+    <mat-toolbar color="primary" fxLayoutGap="1rem">
+      <div fxFlex="68px" fxHide.lt-sm fxLayout="row" fxLayoutAlign="center">
+        <button (click)="showSidenav($event)" mat-icon-button>
+          <mat-icon svgIcon="icon-menu"></mat-icon>
+        </button>
+      </div>
+      <span>{{ pageTitle$ | async }}</span>
+    </mat-toolbar>
+    <main fxFlex="grow" ngClass.lt-sm="mobile">
+      <router-outlet></router-outlet>
+    </main>
+    <mat-toolbar class="bottom-bar" fxHide fxShow.lt-sm style="display: flex;">
+      <button (click)="showNavSheet($event)" mat-icon-button>
+        <mat-icon svgIcon="icon-menu"></mat-icon>
+      </button>
+      <esn-navigation-rail
+        fxFlex="grow"
+        fxLayout="row"
+        fxLayoutAlign="space-evenly center"
+        fxLayoutGap="1rem"
+        style="margin-right: 40px;"
+      ></esn-navigation-rail>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
