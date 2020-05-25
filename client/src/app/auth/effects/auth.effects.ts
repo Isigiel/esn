@@ -16,7 +16,7 @@ export class AuthEffects implements OnInitEffects {
     this.actions$.pipe(
       ofType(effectInitAction),
       mergeMap(() => this.authService.isAuthenticated$),
-      filter(authenticated => authenticated),
+      filter((authenticated) => authenticated),
       map(() => AuthActions.loginSuccessful({})),
     ),
   );
@@ -31,13 +31,16 @@ export class AuthEffects implements OnInitEffects {
   completeLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginSuccessful),
-      tap(({ targetRoute }) => {
-        if (targetRoute) {
-          this.router.navigate([targetRoute]);
-        }
-      }),
-      mergeMap(() => this.http.get<any>('/api/self')),
-      map(user => AuthActions.loginComplete({ user })),
+      mergeMap(({ targetRoute }) =>
+        this.http.get<any>('/api/self').pipe(
+          tap(() => {
+            if (targetRoute) {
+              this.router.navigate([targetRoute]);
+            }
+          }),
+        ),
+      ),
+      map((user) => AuthActions.loginComplete({ user })),
     ),
   );
   logout$ = createEffect(

@@ -6,6 +6,7 @@ import {
 } from '@ngrx/store';
 import * as fromRoot from '@esn/client/store';
 import * as fromAuth from '@esn/client/auth/reducers/auth.reducer';
+import { User } from '@esn/client/core/models';
 
 export const authFeatureKey = 'auth';
 
@@ -29,11 +30,11 @@ export const selectAuthState = createFeatureSelector<State, AuthState>(
 
 export const selectAuthStatusState = createSelector(
   selectAuthState,
-  state => state[fromAuth.statusFeatureKey],
+  (state) => state[fromAuth.statusFeatureKey],
 );
 
 export const selectUser = createSelector(
   selectAuthStatusState,
   fromAuth.getUser,
 );
-export const selectLoggedIn = createSelector(selectUser, user => !!user);
+export const selectLoggedIn = createSelector(selectUser, (user) => !!user);

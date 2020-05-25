@@ -20,7 +20,7 @@ export class AuthService {
     }),
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
-    catchError(err => throwError(err)),
+    catchError((err) => throwError(err)),
   );
   handleRedirectCallback$ = this.auth0Client$.pipe(
     concatMap((client: Auth0Client) => from(client.handleRedirectCallback())),
@@ -49,7 +49,7 @@ export class AuthService {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log in
       client.loginWithRedirect({
-        redirect_uri: `${window.location.origin}`,
+        redirect_uri: `${window.location.origin}/login`,
         appState: { target: redirectPath },
       });
     });
@@ -72,11 +72,12 @@ export class AuthService {
     if (params.includes('code=') && params.includes('state=')) {
       const authComplete$ = this.handleRedirectCallback$.pipe(
         // Have client, now call method to handle auth callback redirect
-        map(cbRes => cbRes.appState?.target ?? '/'),
+        map((cbRes) => cbRes.appState?.target ?? '/'),
       );
       // Subscribe to authentication completion observable
       // Response will be an array of user and login status
-      authComplete$.subscribe(targetRoute => {
+      authComplete$.subscribe((targetRoute) => {
+        console.log(targetRoute);
         this.store.dispatch(AuthActions.loginSuccessful({ targetRoute }));
       });
     }

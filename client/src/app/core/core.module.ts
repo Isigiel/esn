@@ -12,12 +12,14 @@ import { TokenInterceptor } from '@esn/client/core/services/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutEffects, RouterEffects } from '@esn/client/core/effects';
 import { NotFoundComponent } from '@esn/client/core/components/not-found.component';
+import { LoginComponent } from '@esn/client/core/components/login.component';
 
 export const COMPONENTS = [
   AppComponent,
   NavigationRailComponent,
   NavigationSheetComponent,
   NotFoundComponent,
+  LoginComponent,
 ];
 
 @NgModule({

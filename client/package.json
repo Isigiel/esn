@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
     "@auth0/auth0-spa-js": "^1.8.1",
+    "@microsoft/applicationinsights-web": "^2.5.4",
     "@ngrx/component": "github:ngrx/component-builds.git",
     "@ngrx/data": "^9.1.2",
     "@ngrx/effects": "^9.1.2",
