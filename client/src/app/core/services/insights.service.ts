@@ -11,11 +11,13 @@ export class InsightsService {
       instrumentationKey: environment.insightsKey,
     },
   });
+
   constructor() {
     if (environment.production) {
       this.appInsights.loadAppInsights();
     }
   }
+
   setUserId(userId: string) {
     this.appInsights.setAuthenticatedUserContext(userId);
   }

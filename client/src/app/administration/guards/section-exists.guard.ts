@@ -14,6 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class SectionExistsGuard implements CanActivate {
   constructor(private sectionService: SectionService) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -24,6 +25,6 @@ export class SectionExistsGuard implements CanActivate {
     | UrlTree {
     return this.sectionService
       .getByKey(next.paramMap.get('id'))
-      .pipe(map(section => !!section));
+      .pipe(map((section) => !!section));
   }
 }

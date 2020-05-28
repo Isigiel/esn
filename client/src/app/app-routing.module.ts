@@ -16,6 +16,12 @@ const routes: Routes = [
     canLoad: [PermissionGuard],
   },
   { path: 'login', component: LoginComponent, data: { title: 'Please wait' } },
+  {
+    path: 'events',
+    loadChildren: () =>
+      import('./events/events.module').then((m) => m.EventsModule),
+  },
+  { path: '', pathMatch: 'full', redirectTo: 'events' },
   { path: '**', component: NotFoundComponent, data: { title: 'Not found' } },
 ];
 

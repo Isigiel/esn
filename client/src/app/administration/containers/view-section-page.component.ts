@@ -41,6 +41,7 @@ export class ViewSectionPageComponent {
   section$: Observable<Section>;
   searchResults$: Observable<User[]>;
   loading$: Observable<boolean>;
+
   constructor(
     private route: ActivatedRoute,
     private sectionService: SectionService,
@@ -48,10 +49,10 @@ export class ViewSectionPageComponent {
     private store: Store<fromAdmin.State>,
   ) {
     this.section$ = this.route.paramMap.pipe(
-      map(params => params.get('id')),
-      tap(id => this.sectionService.setFilter({ id })),
+      map((params) => params.get('id')),
+      tap((id) => this.sectionService.setFilter({ id })),
       switchMap(() => this.sectionService.filteredEntities$),
-      map(results => results[0]),
+      map((results) => results[0]),
     );
     this.loading$ = store.pipe(select(fromAdmin.selectSearchLoading));
     this.searchResults$ = combineLatest([
@@ -60,14 +61,16 @@ export class ViewSectionPageComponent {
     ]).pipe(
       map(([searchIds, users]) =>
         searchIds
-          .map(id => users[id])
+          .map((id) => users[id])
           .filter((user): user is User => user != null),
       ),
     );
   }
+
   search(query: string) {
     this.store.dispatch(UserSearchActions.searchUser({ query }));
   }
+
   async addUser(user: User) {
     const section = await this.section$.pipe(first()).toPromise();
     this.store.dispatch(SectionActions.addUserToSection({ user, section }));

@@ -1,29 +1,52 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { EventsService } from './events.service';
-import { Permission } from '@esn/server/decorators';
+import { Permission, Profile, Section } from '@esn/server/decorators';
 import { SectionPermissions } from '@esn/shared/section-permissions';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateEventDto } from './event.dto';
+import { CreateEventDto, UpdateEventDto } from './event.dto';
+import { Section as SectionEntity } from '@esn/server/sections/section.entity';
+import { User } from '@esn/server/users/user.entity';
 
 @ApiTags('events')
-@Controller()
+@Controller('events')
 export class EventsController {
   constructor(private eventsService: EventsService) {}
 
-  @Get('events')
-  findAll() {
-    return this.eventsService.findAll();
+  @Get()
+  findAll(@Profile() user: User, @Section() section: SectionEntity) {
+    return this.eventsService.findForSection(section, user);
   }
 
-  @Get('event/:eventId')
+  @Get(':eventId')
   findOneById(@Param('eventId') id: string) {
     return this.eventsService.findOneById(id);
   }
 
   @Permission(SectionPermissions.EVENTS_MANAGE)
   @ApiBearerAuth()
-  @Post('event')
-  create(@Body() createEventDto: CreateEventDto) {
-    return this.eventsService.create(createEventDto);
+  @Post()
+  create(
+    @Body() createEventDto: CreateEventDto,
+    @Section() section: SectionEntity,
+  ) {
+    return this.eventsService.create({ ...createEventDto, section });
+  }
+  @Permission(SectionPermissions.EVENTS_MANAGE)
+  @ApiBearerAuth()
+  @Patch(':eventId')
+  updateEvent(
+    @Param('eventId') id: string,
+    @Body() updateEventDto: UpdateEventDto,
+  ) {
+    return this.eventsService.update({ id, changes: updateEventDto });
   }
 }

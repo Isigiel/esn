@@ -21,8 +21,8 @@ export class SectionEffects {
           .open(SectionCreateDialog, { disableClose: true })
           .afterClosed(),
       ),
-      filter(result => !!result),
-      map(section => SectionActions.createSection({ section })),
+      filter((result) => !!result),
+      map((section) => SectionActions.createSection({ section })),
     ),
   );
   editMembershipDialog$ = createEffect(() =>
@@ -36,8 +36,8 @@ export class SectionEffects {
           })
           .afterClosed(),
       ),
-      filter(result => !!result),
-      map(membership => SectionActions.updateMembership({ membership })),
+      filter((result) => !!result),
+      map((membership) => SectionActions.updateMembership({ membership })),
     ),
   );
   updateMembership$ = createEffect(() =>
@@ -69,8 +69,8 @@ export class SectionEffects {
             })
             .afterClosed(),
         ),
-        filter(result => !!result),
-        tap(id => this.sectionsService.delete(id)),
+        filter((result) => !!result),
+        tap((id) => this.sectionsService.delete(id)),
       ),
     { dispatch: false },
   );
@@ -89,7 +89,7 @@ export class SectionEffects {
       switchMap(({ section, user }) =>
         this.sectionsService.addUserToSection({ section, user }),
       ),
-      map(section =>
+      map((section) =>
         this.sectionsService.createEntityAction(EntityOp.UPDATE_ONE, {
           id: section.id,
           changes: section,

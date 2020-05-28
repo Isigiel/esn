@@ -22,12 +22,12 @@ async function bootstrap() {
   app.use(compression());
   app.use(handleToken());
   app.use(assignTenant());
-  app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
     }),
   );
+  app.setGlobalPrefix('api');
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
   await app.listen(port, () => {

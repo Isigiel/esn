@@ -1,5 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
-import * as LayoutActions from '../actions/layout.actions';
+import { createReducer } from '@ngrx/store';
 
 export const layoutFeatureKey = 'layout';
 
@@ -7,8 +6,4 @@ export interface State {}
 
 export const initialState: State = {};
 
-export const reducer = createReducer(
-  initialState,
-
-  on(LayoutActions.loadLayouts, state => state),
-);
+export const reducer = createReducer(initialState);

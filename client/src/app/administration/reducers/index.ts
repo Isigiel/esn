@@ -36,7 +36,7 @@ export const selectAdministrationState = createFeatureSelector<
 
 export const selectSearchState = createSelector(
   selectAdministrationState,
-  state => state[fromSearch.userSearchFeatureKey],
+  (state) => state[fromSearch.userSearchFeatureKey],
 );
 export const selectSearchUserIds = createSelector(
   selectSearchState,

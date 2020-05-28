@@ -2,20 +2,33 @@ mat-sidenav {
   width: 300px;
 }
 
-.title{
-  span{
+.hamburger-container {
+  margin-left: -16px;
+}
+
+.topnav{
+  position: fixed;
+  z-index: 2;
+}
+
+.title {
+  span {
     background: linear-gradient(33deg, #b92b27, #1565c0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
   margin: 0;
   font-weight: 500;
 }
 
-main{
+main {
   padding-left: 100px;
-  &.mobile{
-    padding: 0;
+  padding-top: 64px;
+
+  &.mobile {
+    padding-left: 0;
+    padding-top: 56px;
   }
 }
 

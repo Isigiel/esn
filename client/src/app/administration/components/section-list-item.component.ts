@@ -22,5 +22,6 @@ import { Section } from '@esn/client/core/models';
 export class SectionListItemComponent {
   @Input() section: Section;
   @Output() delete = new EventEmitter<string>();
+
   constructor() {}
 }

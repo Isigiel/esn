@@ -78,6 +78,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // tslint:disable-next-line:component-class-suffix
 export class SectionCreateDialog {
   sectionForm: FormGroup;
+
   constructor(fb: FormBuilder) {
     this.sectionForm = fb.group({
       name: ['', Validators.required],

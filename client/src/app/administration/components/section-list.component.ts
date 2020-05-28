@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Section } from '@esn/client/core/models';
 
 @Component({
@@ -16,6 +22,7 @@ import { Section } from '@esn/client/core/models';
 export class SectionListComponent {
   @Input() sections: Section[];
   @Output() delete = new EventEmitter<string>();
+
   constructor() {}
 
   trackById(index, item) {

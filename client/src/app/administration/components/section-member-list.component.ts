@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { SectionMembership } from '@esn/client/core/models';
 
 @Component({
@@ -25,7 +31,9 @@ import { SectionMembership } from '@esn/client/core/models';
 export class SectionMemberListComponent {
   @Input() members: SectionMembership[];
   @Output() edit = new EventEmitter<SectionMembership>();
+
   constructor() {}
+
   trackById(index, item) {
     return item.id;
   }

@@ -1,11 +1,18 @@
 <mat-nav-list ngClass.lt-sm="mobile">
-  <a routerLink="admin" mat-list-item routerLinkActive="active">
-    <mat-icon svgIcon="icon-administrative-tools" mat-list-icon></mat-icon>
-    <h3 mat-line>Administration</h3>
-  </a>
+  <ng-container *ngFor="let route of routes">
+    <a
+      *esnWithPermission="route.permission"
+      [routerLink]="route.link"
+      mat-list-item
+      routerLinkActive="active"
+    >
+      <mat-icon [svgIcon]="route.icon" mat-list-icon></mat-icon>
+      <h3 mat-line>{{ route.text }}</h3>
+    </a>
+  </ng-container>
 </mat-nav-list>
 <mat-divider></mat-divider>
-<mat-nav-list ngClass.lt-sm="mobile" *ngrxLet="loggedIn$ as authenticated">
+<mat-nav-list *ngrxLet="loggedIn$ as authenticated" ngClass.lt-sm="mobile">
   <mat-list-item (click)="login()" *ngIf="!authenticated">
     <mat-icon mat-list-icon svgIcon="icon-login-rounded-right"></mat-icon>
     <h3 mat-line>Login</h3>

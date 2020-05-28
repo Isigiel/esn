@@ -31,7 +31,7 @@ export const reducer = createReducer(
         };
   }),
   on(UserSearchActions.searchSuccess, (state, { users }) => ({
-    ids: users.map(user => user.id),
+    ids: users.map((user) => user.id),
     loading: false,
     error: '',
   })),

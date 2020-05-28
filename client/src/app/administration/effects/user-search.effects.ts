@@ -33,12 +33,13 @@ export class UserSearchEffects {
           return this.userService.getWithQuery({ search: query }).pipe(
             takeUntil(nextSearch$),
             map((users: User[]) => UserSearchActions.searchSuccess({ users })),
-            catchError(err =>
+            catchError((err) =>
               of(UserSearchActions.searchFailure({ error: err.message })),
             ),
           );
         }),
       ),
   );
+
   constructor(private actions$: Actions, private userService: UserService) {}
 }

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SectionMembership } from '@esn/client/core/models';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { flatMap, keys, mapValues } from 'lodash-es';
+import { flatMap, mapKeys, mapValues, values } from 'lodash-es';
 import { SectionPermissions } from '@esn/shared/section-permissions';
 
 @Component({
@@ -33,17 +33,22 @@ import { SectionPermissions } from '@esn/shared/section-permissions';
 })
 export class EditMembershipDialogComponent {
   permissionForm: FormGroup;
-  permissions = keys(SectionPermissions);
+  permissions = values(SectionPermissions);
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { membership: SectionMembership },
     fb: FormBuilder,
   ) {
     this.permissionForm = fb.group(
-      mapValues(SectionPermissions, (_, perm: SectionPermissions) => [
-        this.data.membership.permissions.includes(perm),
-      ]),
+      mapValues(
+        mapKeys(SectionPermissions, (value) => value),
+        (_, perm: SectionPermissions) => [
+          this.data.membership.permissions.includes(perm),
+        ],
+      ),
     );
   }
+
   get update() {
     return {
       ...this.data.membership,

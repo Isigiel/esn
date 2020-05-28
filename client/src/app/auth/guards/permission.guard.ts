@@ -1,23 +1,21 @@
 import { Inject, Injectable } from '@angular/core';
 import {
+  ActivatedRouteSnapshot,
   CanActivate,
+  CanActivateChild,
   CanLoad,
   Route,
-  UrlSegment,
-  ActivatedRouteSnapshot,
   RouterStateSnapshot,
+  UrlSegment,
   UrlTree,
-  CanActivateChild,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as fromAuth from '@esn/client/auth/reducers';
 import { GlobalPermissions } from '@esn/shared/global-permissions';
 import { SectionPermissions } from '@esn/shared/section-permissions';
 import { first } from 'rxjs/operators';
-import { DOCUMENT, Location } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { AuthActions } from '@esn/client/auth/actions';
-import { User } from '@esn/client/core/models';
 import { isAllowed } from '@esn/shared/checkPermisson';
 
 @Injectable({
@@ -28,6 +26,7 @@ export class PermissionGuard implements CanActivate, CanActivateChild, CanLoad {
     private store: Store<fromAuth.State>,
     @Inject(DOCUMENT) private document: Document,
   ) {}
+
   async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -63,6 +62,7 @@ export class PermissionGuard implements CanActivate, CanActivateChild, CanLoad {
     }
     return await this.checkPermission(permission);
   }
+
   private retrievePermission(
     data,
   ): GlobalPermissions | SectionPermissions | null {

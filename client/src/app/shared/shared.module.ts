@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   ErrorStateMatcher,
   MatNativeDateModule,
+  MatRippleModule,
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,6 +33,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '../../environments/environment';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { IconSrcDirective } from '@esn/client/shared/directives/icon-src.directive';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { WithPermissionDirective } from './directives/with-permission.directive';
+import { MarkdownModule } from 'ngx-markdown';
 
 const materialModules = [
   MatSidenavModule,
@@ -49,25 +58,35 @@ const materialModules = [
   MatAutocompleteModule,
   MatProgressSpinnerModule,
   MatCheckboxModule,
+  MatSlideToggleModule,
+  MatSelectModule,
+  MatCardModule,
+  MatRippleModule,
+  MatChipsModule,
+  TextFieldModule,
 ];
 
 export const COMPONENTS = [ConfirmDialog];
+export const DIRECTIVES = [IconSrcDirective, WithPermissionDirective];
 
 @NgModule({
-  declarations: COMPONENTS,
+  declarations: [COMPONENTS, DIRECTIVES],
   imports: [
     CommonModule,
     materialModules,
     FlexLayoutModule,
     ReactiveFormsModule,
     ReactiveComponentModule,
+    MarkdownModule,
   ],
   exports: [
     materialModules,
     COMPONENTS,
+    DIRECTIVES,
     FlexLayoutModule,
     ReactiveFormsModule,
     ReactiveComponentModule,
+    MarkdownModule,
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } },

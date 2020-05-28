@@ -34,4 +34,8 @@ export class SectionsService {
   deleteOne(id: string) {
     return this.sectionRepository.delete(id);
   }
+
+  getOneByShortCode(shortCode: string) {
+    return this.sectionRepository.findOneOrFail({ shortCode });
+  }
 }

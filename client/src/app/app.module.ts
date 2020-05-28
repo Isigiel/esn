@@ -16,6 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AuthModule } from '@esn/client/auth';
 import { metaReducers, ROOT_REDUCERS } from './store';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,20 @@ import { metaReducers, ROOT_REDUCERS } from './store';
     }),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
+    MarkdownModule.forRoot({
+      markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+          gfm: true,
+          tables: true,
+          breaks: false,
+          pedantic: false,
+          sanitize: false,
+          smartLists: true,
+          smartypants: true,
+        },
+      },
+    }),
     CoreModule,
     SharedModule,
     AuthModule,

@@ -21,6 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     private store: Store<fromAuth.State>,
     @Inject(DOCUMENT) private document: Document,
   ) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -42,6 +43,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       }),
     );
   }
+
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,

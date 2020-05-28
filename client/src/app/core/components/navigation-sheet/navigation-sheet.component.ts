@@ -5,6 +5,7 @@ import * as fromAuth from '@esn/client/auth/reducers';
 import { Observable } from 'rxjs';
 import { AuthActions } from '@esn/client/auth/actions';
 import { Location } from '@angular/common';
+import { GlobalPermissions } from '@esn/shared/global-permissions';
 
 @Component({
   selector: 'esn-navigation-sheet',
@@ -13,6 +14,20 @@ import { Location } from '@angular/common';
 })
 export class NavigationSheetComponent {
   loggedIn$: Observable<boolean>;
+  routes = [
+    {
+      icon: 'icon-tear-off-calendar',
+      text: 'Events',
+      link: 'events',
+      permission: '',
+    },
+    {
+      icon: 'icon-administrative-tools',
+      text: 'Administration',
+      link: 'admin',
+      permission: GlobalPermissions.ADMIN,
+    },
+  ];
 
   constructor(
     private store: Store<fromRoot.State & fromAuth.State>,

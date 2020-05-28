@@ -71,6 +71,7 @@
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 
 
@@ -166,7 +167,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the GPL3.0 License. See `LICENSE` for more information.
+Distributed under the GPL3.0 License. See [`LICENSE`](https://github.com/Isigiel/esn/blob/master/LICENSE) for more information.
 
 
 
@@ -180,11 +181,11 @@ Project Link: [https://github.com/Isigiel/esn](https://github.com/Isigiel/esn)
 
 
 <!-- ACKNOWLEDGEMENTS -->
-<!-- ## Acknowledgements
+## Acknowledgements
 
-* []()
-* []()
-* []() -->
+* [icons8](https://icons8.com/) for providing icons and illustrations
+* [browserStack](https://www.browserstack.com/) for providing native device testing
+* [auth0](https://auth0.com/?utm_source=oss&utm_medium=gp&utm_campaign=oss) for providing token based authentication
 
 
 
@@ -207,4 +208,4 @@ Project Link: [https://github.com/Isigiel/esn](https://github.com/Isigiel/esn)
 [build-shield]: https://dev.azure.com/isigiel/tumi/_apis/build/status/Isigiel.esn?branchName=master
 [build-shield-2]: https://img.shields.io/azure-devops/build/isigiel/tumi/9?style=for-the-badge
 [build-url]: https://dev.azure.com/isigiel/tumi/_build/latest?definitionId=9&branchName=master
-[product-screenshot]: _github/images/screenshot.jpg
+[product-screenshot]: _github/images/screenshot.png

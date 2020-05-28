@@ -15,6 +15,7 @@ import { UsersModule } from './users/users.module';
 import { SectionsModule } from './sections/sections.module';
 import { EventsModule } from './events/events.module';
 import { MembershipsModule } from './memberships/memberships.module';
+import { SectionMiddleware } from '@esn/server/middleware/section.middleware';
 
 @Module({
   imports: [
@@ -49,5 +50,6 @@ import { MembershipsModule } from './memberships/memberships.module';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(ProfileMiddleware).forRoutes('*');
+    consumer.apply(SectionMiddleware).forRoutes('*');
   }
 }

@@ -32,7 +32,11 @@
     "@ngrx/router-store": "^9.1.2",
     "@ngrx/store": "^9.1.2",
     "@ngrx/store-devtools": "^9.0.0",
+    "class-transformer": "^0.2.3",
+    "date-fns": "^2.14.0",
     "lodash-es": "^4.17.15",
+    "ngx-markdown": "^9.1.1",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

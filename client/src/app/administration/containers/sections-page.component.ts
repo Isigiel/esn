@@ -9,17 +9,24 @@ import { SectionActions } from '@esn/client/administration/actions/idex';
 @Component({
   selector: 'esn-sections-page',
   template: `
-    <button mat-stroked-button (click)="newSection()">New Section</button>
     <esn-section-list
       [sections]="sections$ | ngrxPush"
       (delete)="deleteSection($event)"
     ></esn-section-list>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        display: block;
+        padding: 1rem;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionsPageComponent {
   sections$: Observable<Section[]>;
+
   constructor(
     private sectionsService: SectionService,
     private store: Store<fromAdmin.State>,

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Section, SectionMembership } from '@esn/client/core/models';
-import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from '@ngrx/data';
+import {
+  EntityCollectionServiceBase,
+  EntityCollectionServiceElementsFactory,
+} from '@ngrx/data';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

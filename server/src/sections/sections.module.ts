@@ -8,5 +8,6 @@ import { Section } from './section.entity';
   imports: [TypeOrmModule.forFeature([Section])],
   controllers: [SectionsController],
   providers: [SectionsService],
+  exports: [SectionsService],
 })
 export class SectionsModule {}

@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Section } from '../sections/section.entity';
+import { PublicationState } from '@esn/server/shared';
 
 @Entity()
 export class Event {
@@ -10,17 +11,23 @@ export class Event {
   title: string;
 
   @Column()
-  teaser_text: string;
+  icon: string;
 
-  @Column()
+  @Column('ntext')
+  teaser: string;
+
+  @Column('ntext')
   description: string;
 
-  @Column('date')
+  @Column()
   start: Date;
 
-  @ManyToOne(
-    type => Section,
-    section => section.events,
-  )
+  @Column()
+  end: Date;
+
+  @Column({ default: PublicationState.DRAFT })
+  publicationState: PublicationState;
+
+  @ManyToOne((type) => Section, (section) => section.events)
   section: Section;
 }

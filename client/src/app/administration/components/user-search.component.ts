@@ -62,7 +62,9 @@ export class UserSearchComponent {
   @Output() userSelected = new EventEmitter<User>();
   @Output() search = new EventEmitter<string>();
   userControl = new FormControl('');
+
   constructor() {}
+
   displayFn(user: User): string {
     return user && user.email ? user.email : '';
   }

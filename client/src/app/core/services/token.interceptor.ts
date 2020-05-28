@@ -18,8 +18,8 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
     return this.authService.getTokenSilently$().pipe(
-      catchError(err => of('')),
-      mergeMap(token => {
+      catchError((err) => of('')),
+      mergeMap((token) => {
         if (token) {
           const tokenReq = request.clone({
             setHeaders: { Authorization: `Bearer ${token}` },
