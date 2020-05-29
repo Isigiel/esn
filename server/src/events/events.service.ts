@@ -33,11 +33,22 @@ export class EventsService {
 
   findForSection(section: Section, user: User) {
     const permissions = collectPermissions(user, section.shortCode);
-    if (!isAllowed(permissions, SectionPermissions.EVENTS_MANAGE)) {
-      return this.eventRepository.find({
-        section,
-        publicationState: PublicationState.PUBLIC,
-      });
+    if (!isAllowed(permissions, SectionPermissions.EVENTS_VIEWDRAFTS)) {
+      if (
+        user.memberships.some((m) => m.section.shortCode === section.shortCode)
+      ) {
+        return this.eventRepository.find({
+          where: [
+            { section, publicationState: PublicationState.PUBLIC },
+            { section, publicationState: PublicationState.INTERNAL },
+          ],
+        });
+      } else {
+        return this.eventRepository.find({
+          section,
+          publicationState: PublicationState.PUBLIC,
+        });
+      }
     } else {
       return this.eventRepository.find({
         section,

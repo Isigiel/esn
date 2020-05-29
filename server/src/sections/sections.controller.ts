@@ -1,19 +1,20 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { Permission } from '../decorators/permission.decorator';
-import { GlobalPermissions } from '@esn/shared/global-permissions';
+import { Permission, Profile } from '@esn/server/decorators';
 import { SectionsService } from './sections.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AddSectionMemberDto, CreateSectionDto } from './section.dto';
+import { GlobalPermissions, SectionPermissions } from '@esn/server/shared';
+import { User } from '@esn/server/users/user.entity';
 
 @ApiTags('sections')
 @ApiBearerAuth()
-@Permission(GlobalPermissions.ADMIN)
+@Permission(SectionPermissions.SECTION_MANAGE)
 @Controller()
 export class SectionsController {
   constructor(private sectionsService: SectionsService) {}
   @Get('sections')
-  getAll() {
-    return this.sectionsService.getAll();
+  getAll(@Profile() user: User) {
+    return this.sectionsService.getAllForUser(user);
   }
   @Get('section/:sectionId')
   getOne(@Param('sectionId') id: string) {
@@ -35,6 +36,7 @@ export class SectionsController {
     });
   }
 
+  @Permission(GlobalPermissions.ADMIN)
   @Delete('section/:sectionId')
   delete(@Param('sectionId') id: string) {
     return this.sectionsService.deleteOne(id);

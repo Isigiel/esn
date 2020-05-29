@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { exhaustMap, filter, map, switchMap, tap } from 'rxjs/operators';
+import {
+  exhaustMap,
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
 import * as SectionActions from '../actions/section.actions';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +17,7 @@ import { SectionService } from '@esn/client/core/services';
 import { ConfirmDialog } from '@esn/client/shared/components/confirm.dialog';
 import { EntityOp } from '@ngrx/data';
 import { EditMembershipDialogComponent } from '@esn/client/administration/components/edit-membership-dialog.component';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SectionEffects {
@@ -83,6 +91,20 @@ export class SectionEffects {
     { dispatch: false },
   );
 
+  createInvites$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SectionActions.createInvite),
+        mergeMap((data) =>
+          this.sectionsService.createInvites(data).pipe(map(() => data)),
+        ),
+        tap((data) =>
+          this.router.navigate(['/admin/sections', data.sectionId]),
+        ),
+      ),
+    { dispatch: false },
+  );
+
   addUserToSection$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SectionActions.addUserToSection),
@@ -101,6 +123,7 @@ export class SectionEffects {
   constructor(
     private actions$: Actions,
     private dialog: MatDialog,
+    private router: Router,
     private sectionsService: SectionService,
   ) {}
 }

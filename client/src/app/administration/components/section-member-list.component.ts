@@ -10,7 +10,13 @@ import { SectionMembership } from '@esn/client/core/models';
 @Component({
   selector: 'esn-section-member-list',
   template: `
-    <h3>Current Members</h3>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3>Current Members</h3>
+      <a mat-flat-button color="primary" routerLink="invite">
+        <mat-icon svgIcon="icon-invite"></mat-icon>
+        <span>Create Invite</span>
+      </a>
+    </div>
     <mat-action-list>
       <button
         mat-list-item

@@ -9,7 +9,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
-import { Permission, Profile, Section } from '@esn/server/decorators';
+import { Permission, Profile, currentSection } from '@esn/server/decorators';
 import { SectionPermissions } from '@esn/shared/section-permissions';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateEventDto, UpdateEventDto } from './event.dto';
@@ -22,7 +22,7 @@ export class EventsController {
   constructor(private eventsService: EventsService) {}
 
   @Get()
-  findAll(@Profile() user: User, @Section() section: SectionEntity) {
+  findAll(@Profile() user: User, @currentSection() section: SectionEntity) {
     return this.eventsService.findForSection(section, user);
   }
 
@@ -36,7 +36,7 @@ export class EventsController {
   @Post()
   create(
     @Body() createEventDto: CreateEventDto,
-    @Section() section: SectionEntity,
+    @currentSection() section: SectionEntity,
   ) {
     return this.eventsService.create({ ...createEventDto, section });
   }

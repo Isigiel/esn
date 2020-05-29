@@ -4,6 +4,7 @@ import { Section } from './section.entity';
 import { DeepPartial, EntityManager, Repository } from 'typeorm';
 import { SectionMembership } from '@esn/server/memberships/section-membership.entity';
 import { User } from '@esn/server/users/user.entity';
+import { GlobalPermissions, SectionPermissions } from '@esn/server/shared';
 
 @Injectable()
 export class SectionsService {
@@ -15,8 +16,14 @@ export class SectionsService {
     this.sectionRepository.create(section);
     return this.sectionRepository.save(section);
   }
-  getAll() {
-    return this.sectionRepository.find();
+
+  async getAllForUser(user: User): Promise<Section[]> {
+    if (user.permissions.includes(GlobalPermissions.ADMIN)) {
+      return await this.sectionRepository.find();
+    }
+    return user.memberships
+      .filter((m) => m.permissions.includes(SectionPermissions.SECTION_MANAGE))
+      .map((m) => m.section);
   }
   getOne(id: string, relations = ['memberships', 'memberships.user']) {
     return this.sectionRepository.findOne(id, { relations });

@@ -16,6 +16,9 @@ import { SectionsModule } from './sections/sections.module';
 import { EventsModule } from './events/events.module';
 import { MembershipsModule } from './memberships/memberships.module';
 import { SectionMiddleware } from '@esn/server/middleware/section.middleware';
+import { Auth0Service } from './services/auth0.service';
+import { MailsService } from './services/mails.service';
+import { InviteModule } from './invite/invite.module';
 
 @Module({
   imports: [
@@ -43,9 +46,10 @@ import { SectionMiddleware } from '@esn/server/middleware/section.middleware';
     SectionsModule,
     EventsModule,
     MembershipsModule,
+    InviteModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, Auth0Service, MailsService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

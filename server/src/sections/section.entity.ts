@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { SectionMembership } from '../memberships/section-membership.entity';
 import { Event } from '../events/event.entity';
+import { Invite } from '@esn/server/invite/invite.entity';
 
 @Entity()
 export class Section {
@@ -22,15 +23,12 @@ export class Section {
   @Column()
   university: string;
 
-  @OneToMany(
-    type => SectionMembership,
-    membership => membership.section,
-  )
+  @OneToMany((type) => SectionMembership, (membership) => membership.section)
   memberships: SectionMembership[];
 
-  @OneToMany(
-    type => Event,
-    event => event.section,
-  )
+  @OneToMany((type) => Event, (event) => event.section)
   events: Event[];
+
+  @OneToMany((type) => Invite, (invite) => invite.section)
+  invites: Invite[];
 }

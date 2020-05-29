@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Section, SectionMembership, User } from '@esn/client/core/models';
+import { SectionPermissions } from '@esn/shared/section-permissions';
 
 export const openSectionDialog = createAction('[Section] Open dialog');
 
@@ -23,3 +24,14 @@ export const updateMembership = createAction(
   '[Section] Update Membership',
   props<{ membership: SectionMembership }>(),
 );
+export const createInvite = createAction(
+  '[Section] Create Invite',
+  props<{
+    sectionId: string;
+    permissions: SectionPermissions[];
+    emails: string[];
+  }>(),
+);
+/*export const createInviteSuccess = createAction(
+  '[Section] Create Invite Success',
+);*/

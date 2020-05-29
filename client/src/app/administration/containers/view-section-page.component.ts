@@ -15,16 +15,18 @@ import { select, Store } from '@ngrx/store';
   selector: 'esn-view-section-page',
   template: `
     <esn-section-info [section]="section$ | ngrxPush"></esn-section-info>
-    <esn-user-search
+    <!--<esn-user-search
       (userSelected)="addUser($event)"
       (search)="search($event)"
       [userOptions]="searchResults$ | ngrxPush"
       [searching]="loading$ | ngrxPush"
-    ></esn-user-search>
-    <esn-section-member-list
-      (edit)="editUser($event)"
-      [members]="(section$ | ngrxPush).memberships"
-    ></esn-section-member-list>
+    ></esn-user-search>-->
+    <div fxLayout="column" fxLayout.gt-md="row">
+      <esn-section-member-list
+        (edit)="editUser($event)"
+        [members]="(section$ | ngrxPush).memberships"
+      ></esn-section-member-list>
+    </div>
   `,
   styles: [
     `

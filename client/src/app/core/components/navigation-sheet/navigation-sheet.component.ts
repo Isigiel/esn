@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AuthActions } from '@esn/client/auth/actions';
 import { Location } from '@angular/common';
 import { GlobalPermissions } from '@esn/shared/global-permissions';
+import { SectionPermissions } from '@esn/shared/section-permissions';
 
 @Component({
   selector: 'esn-navigation-sheet',
@@ -25,7 +26,7 @@ export class NavigationSheetComponent {
       icon: 'icon-administrative-tools',
       text: 'Administration',
       link: 'admin',
-      permission: GlobalPermissions.ADMIN,
+      permission: SectionPermissions.SECTION_MANAGE,
     },
   ];
 

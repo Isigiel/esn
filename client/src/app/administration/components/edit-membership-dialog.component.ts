@@ -11,9 +11,14 @@ import { SectionPermissions } from '@esn/shared/section-permissions';
     <h2 mat-dialog-title>
       Edit permissions for {{ data.membership.user.name }}
     </h2>
-    <mat-dialog-content>
+    <mat-dialog-content style="padding: 1rem;">
       <h3>Assigned Permissions</h3>
-      <form [formGroup]="permissionForm" style="padding: 1rem 0;">
+      <form
+        [formGroup]="permissionForm"
+        style="padding: 1rem 0;"
+        fxLayout="row wrap"
+        fxLayoutGap="1rem grid"
+      >
         <mat-checkbox
           *ngFor="let permission of permissions"
           [formControlName]="permission"

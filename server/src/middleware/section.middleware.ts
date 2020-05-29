@@ -6,15 +6,17 @@ export class SectionMiddleware implements NestMiddleware {
   constructor(private sectionsService: SectionsService) {}
 
   use(req: any, res: any, next: () => void) {
-    if (!!req.profile) {
+    if (!!req.profile && !!req.profile.memberships) {
       const membership = req.profile.memberships.find(
         (m) => m.section.shortCode === req.tenant,
       );
       if (!!membership) {
         req.section = membership.section;
+        next();
+        return;
       }
-      next();
-    } else if (!!req.tenant) {
+    }
+    if (!!req.tenant) {
       this.sectionsService.getOneByShortCode(req.tenant).then((section) => {
         req.section = section;
         next();

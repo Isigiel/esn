@@ -46,7 +46,7 @@ export class WithPermissionDirective implements OnDestroy {
           isAllowed(
             [
               ...user.permissions,
-              ...(user.memberships.find(
+              ...(user.memberships?.find(
                 (m) => m.section.shortCode === this.getTenant(),
               )?.permissions ?? []),
             ],

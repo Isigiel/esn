@@ -6,6 +6,7 @@ import {
 } from '@ngrx/data';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SectionPermissions } from '@esn/shared/section-permissions';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,14 @@ export class SectionService extends EntityCollectionServiceBase<Section> {
         permissions: membership.permissions,
       },
     );
+  }
+
+  public createInvites(data: {
+    sectionId: string;
+    permissions: SectionPermissions[];
+    emails: string[];
+  }) {
+    console.log(data);
+    return this.http.post('/api/invite', data);
   }
 }

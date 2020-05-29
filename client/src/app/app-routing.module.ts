@@ -4,6 +4,7 @@ import { NotFoundComponent } from '@esn/client/core/components/not-found.compone
 import { PermissionGuard } from '@esn/client/auth/guards/permission.guard';
 import { GlobalPermissions } from '@esn/shared/global-permissions';
 import { LoginComponent } from '@esn/client/core/components/login.component';
+import { SectionPermissions } from '@esn/shared/section-permissions';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
       import('./administration/administration.module').then(
         (m) => m.AdministrationModule,
       ),
-    data: { permission: GlobalPermissions.ADMIN },
+    data: { permission: SectionPermissions.SECTION_MANAGE },
     canLoad: [PermissionGuard],
   },
   { path: 'login', component: LoginComponent, data: { title: 'Please wait' } },
@@ -22,6 +23,7 @@ const routes: Routes = [
       import('./events/events.module').then((m) => m.EventsModule),
   },
   { path: '', pathMatch: 'full', redirectTo: 'events' },
+  { path: 'invite', loadChildren: () => import('./invite/invite.module').then(m => m.InviteModule) },
   { path: '**', component: NotFoundComponent, data: { title: 'Not found' } },
 ];
 

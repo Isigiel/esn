@@ -12,11 +12,13 @@ import { SectionEffects } from './effects/section.effects';
 import { SharedModule } from '@esn/client/shared';
 import { SectionCreateDialog } from './components/section-create.dialog';
 import { SectionListItemComponent } from './components/section-list-item.component';
-import { ViewSectionPageComponent } from './containers/view-section-page.component';
+import { ViewSectionPageComponent } from '@esn/client/administration/containers';
 import { SectionMemberListComponent } from './components/section-member-list.component';
 import { UserSearchComponent } from './components/user-search.component';
 import { UserSearchEffects } from './effects/user-search.effects';
 import { EditMembershipDialogComponent } from './components/edit-membership-dialog.component';
+import { CreateInvitePageComponent } from '@esn/client/administration/containers';
+import { CreateSectionFormComponent } from './components/create-section-form.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { EditMembershipDialogComponent } from './components/edit-membership-dial
     SectionMemberListComponent,
     UserSearchComponent,
     EditMembershipDialogComponent,
+    CreateInvitePageComponent,
+    CreateSectionFormComponent,
   ],
   imports: [
     CommonModule,

@@ -1,13 +1,20 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { GlobalPermissions } from '@esn/shared/global-permissions';
 import { SectionMembership } from '../memberships/section-membership.entity';
+import { Invite } from '@esn/server/invite/invite.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   loginId: string;
 
   // @Column({ default: '' })
@@ -26,7 +33,7 @@ export class User {
   picture: string;
 
   @Column()
-  email_verified: boolean;
+  emailVerified: boolean;
 
   @Column({ type: 'simple-array' })
   permissions: GlobalPermissions[];
@@ -34,9 +41,15 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany(
-    type => SectionMembership,
-    membership => membership.user,
-  )
+  @UpdateDateColumn()
+  lastUpdate: Date;
+
+  @OneToMany((type) => SectionMembership, (membership) => membership.user)
   memberships: SectionMembership[];
+
+  @OneToMany((type) => Invite, (invite) => invite.creator)
+  createdInvites: Invite[];
+
+  @OneToMany((type) => Invite, (invite) => invite.claimer)
+  claimedInvites: Invite[];
 }
