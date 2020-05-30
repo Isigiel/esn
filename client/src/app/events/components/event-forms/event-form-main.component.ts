@@ -30,7 +30,7 @@ import { debounceTime } from 'rxjs/operators';
           <mat-hint>
             Read up on icons in the
             <a
-              href="https://dev.azure.com/isigiel/tumi/_wiki/wikis/tumi.wiki/3/Event-Icons"
+              href="https://dev.azure.com/isigiel/esn.world/_wiki/wikis/esn.world-wiki/3/Event-Icons"
               target="_blank"
               >wiki</a
             >

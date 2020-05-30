@@ -22,13 +22,14 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+<!-- [![Contributors][contributors-shield]][contributors-url] -->
+<!-- [![Forks][forks-shield]][forks-url] -->
 [![Stargazers][stars-shield]][stars-url]
-<!-- [![Issues][issues-shield]][issues-url] -->
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 [![Build Status][build-shield-2]][build-url]
+
+<!-- [![Issues][issues-shield]][issues-url] -->
+<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 
 
@@ -44,7 +45,7 @@
   <p align="center">
     A web app to help run esn sections
     <br />
-    <a href="https://dev.azure.com/isigiel/tumi/_wiki/wikis/tumi.wiki/1/Home"><strong>Explore the docs »</strong></a>
+    <a href="https://dev.azure.com/isigiel/esn.world"><strong>Learn more »</strong></a>
     <br />
     <br />
     <!-- <a href="https://github.com/Isigiel/esn">View Demo</a>
@@ -78,7 +79,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![ESN.WORLD Screen Shot][product-screenshot]](https://tumi.esn.world)
+[![ESN.WORLD Screen Shot][product-screenshot]](https://dev.azure.com/isigiel/esn.world)
 
 
 ### Built With
@@ -147,7 +148,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_ --
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [boards](https://dev.azure.com/isigiel/tumi/_boards/board/t/tumi%20Team/Epics) for a list of proposed features (and known issues).
+See the [boards](https://dev.azure.com/isigiel/esn.world/_backlogs/backlog/esn.world%20Team/Features/) for a list of proposed features (and known issues).
 
 
 
@@ -206,6 +207,6 @@ Project Link: [https://github.com/Isigiel/esn](https://github.com/Isigiel/esn)
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/heddendorp/
 [build-shield]: https://dev.azure.com/isigiel/tumi/_apis/build/status/Isigiel.esn?branchName=master
-[build-shield-2]: https://img.shields.io/azure-devops/build/isigiel/tumi/9?style=for-the-badge
-[build-url]: https://dev.azure.com/isigiel/tumi/_build/latest?definitionId=9&branchName=master
-[product-screenshot]: _github/images/screenshot.png
+[build-shield-2]: https://img.shields.io/azure-devops/build/isigiel/esn.world/9?style=for-the-badge
+[build-url]: https://dev.azure.com/isigiel/esn.world/_build?definitionId=9&_a=summary
+[product-screenshot]: _github/images/screenshot.jpg

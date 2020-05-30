@@ -47,6 +47,17 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+.title {
+  span {
+    background: linear-gradient(33deg, #b92b27, #1565c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  margin: 0 !important;
+  font-weight: 500 !important;
+}
+
 .mat-bottom-sheet-container {
   border-radius: 1rem 1rem 0 0;
   padding-top: 1rem !important;

@@ -24,6 +24,7 @@ const routes: Routes = [
   },
   { path: '', pathMatch: 'full', redirectTo: 'events' },
   { path: 'invite', loadChildren: () => import('./invite/invite.module').then(m => m.InviteModule) },
+  { path: 'section', loadChildren: () => import('./section/section.module').then(m => m.SectionModule) },
   { path: '**', component: NotFoundComponent, data: { title: 'Not found' } },
 ];
 

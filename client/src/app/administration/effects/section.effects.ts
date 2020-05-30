@@ -16,7 +16,7 @@ import { SectionCreateDialog } from '@esn/client/administration/components/secti
 import { SectionService } from '@esn/client/core/services';
 import { ConfirmDialog } from '@esn/client/shared/components/confirm.dialog';
 import { EntityOp } from '@ngrx/data';
-import { EditMembershipDialogComponent } from '@esn/client/administration/components/edit-membership-dialog.component';
+import { EditMembershipDialogComponent } from '@esn/client/administration/components/view-section/edit-membership-dialog.component';
 import { Router } from '@angular/router';
 
 @Injectable()

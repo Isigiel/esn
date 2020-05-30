@@ -21,7 +21,7 @@ import { select, Store } from '@ngrx/store';
       [userOptions]="searchResults$ | ngrxPush"
       [searching]="loading$ | ngrxPush"
     ></esn-user-search>-->
-    <div fxLayout="column" fxLayout.gt-md="row">
+    <div fxLayout="column">
       <esn-section-member-list
         (edit)="editUser($event)"
         [members]="(section$ | ngrxPush).memberships"

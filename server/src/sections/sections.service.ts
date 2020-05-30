@@ -14,6 +14,8 @@ export class SectionsService {
   ) {}
   insert(section: DeepPartial<Section>): Promise<Section> {
     this.sectionRepository.create(section);
+    section.about = `# Welcome to ${section.name}!
+We will have more info for you here shortly, in the meanwhile you can check out out [upcoming events](/events).`;
     return this.sectionRepository.save(section);
   }
 
@@ -43,6 +45,10 @@ export class SectionsService {
   }
 
   getOneByShortCode(shortCode: string) {
-    return this.sectionRepository.findOneOrFail({ shortCode });
+    return this.sectionRepository.findOne({ shortCode });
+  }
+
+  update(section: DeepPartial<Section>) {
+    return this.sectionRepository.save(section);
   }
 }

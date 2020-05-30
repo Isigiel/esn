@@ -23,6 +23,12 @@ export class NavigationSheetComponent {
       permission: '',
     },
     {
+      icon: 'icon-home-page',
+      text: 'About',
+      link: 'section',
+      permission: '',
+    },
+    {
       icon: 'icon-administrative-tools',
       text: 'Administration',
       link: 'admin',

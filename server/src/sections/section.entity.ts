@@ -23,6 +23,9 @@ export class Section {
   @Column()
   university: string;
 
+  @Column('ntext')
+  about: string;
+
   @OneToMany((type) => SectionMembership, (membership) => membership.section)
   memberships: SectionMembership[];
 

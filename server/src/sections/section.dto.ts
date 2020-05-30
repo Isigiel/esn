@@ -17,3 +17,8 @@ export class AddSectionMemberDto {
   @IsUUID()
   userId: string;
 }
+
+export class UpdateAboutDto {
+  @IsString()
+  about: string;
+}

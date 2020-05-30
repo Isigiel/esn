@@ -11,7 +11,10 @@ import { SectionMembership } from '@esn/client/core/models';
   selector: 'esn-section-member-list',
   template: `
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h3>Current Members</h3>
+      <div>
+        <h3 style="margin: 0;">Current Members</h3>
+        <small>Click a member to edit their permission</small>
+      </div>
       <a mat-flat-button color="primary" routerLink="invite">
         <mat-icon svgIcon="icon-invite"></mat-icon>
         <span>Create Invite</span>
@@ -31,7 +34,13 @@ import { SectionMembership } from '@esn/client/core/models';
       </button>
     </mat-action-list>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionMemberListComponent {

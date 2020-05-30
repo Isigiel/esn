@@ -5,6 +5,7 @@ const extensions = new Map();
 extensions.set(GlobalPermissions.ADMIN, [SectionPermissions.SECTION_MANAGE]);
 extensions.set(SectionPermissions.SECTION_MANAGE, [
   SectionPermissions.EVENTS_MANAGE,
+  SectionPermissions.SECTION_INFO,
 ]);
 extensions.set(SectionPermissions.EVENTS_MANAGE, [
   SectionPermissions.EVENTS_VIEWDRAFTS,

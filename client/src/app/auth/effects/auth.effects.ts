@@ -40,7 +40,6 @@ export class AuthEffects implements OnInitEffects {
           }),
         ),
       ),
-      tap(console.log),
       map((user) => AuthActions.loginComplete({ user })),
     ),
   );

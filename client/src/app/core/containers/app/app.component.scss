@@ -11,17 +11,6 @@ mat-sidenav {
   z-index: 2;
 }
 
-.title {
-  span {
-    background: linear-gradient(33deg, #b92b27, #1565c0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  margin: 0;
-  font-weight: 500;
-}
-
 main {
   padding-left: 100px;
   padding-top: 64px;
