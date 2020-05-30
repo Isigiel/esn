@@ -168,7 +168,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the GPL3.0 License. See [`LICENSE`](https://github.com/Isigiel/esn/blob/master/LICENSE) for more information.
+Distributed under the GPL3.0 License. See [`LICENSE`](https://github.com/Isigiel/esn/blob/master/LICENSE.txt) for more information.
 
 
 
