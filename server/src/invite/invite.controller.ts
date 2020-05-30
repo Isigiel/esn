@@ -21,6 +21,11 @@ export class InviteController {
     return this.inviteService.findOne(id);
   }
 
+  @Post(':inviteId')
+  claimInvite(@Param('inviteId') id: string, @Profile() user: User) {
+    return this.inviteService.useInvite({ id, user });
+  }
+
   @ApiBearerAuth()
   @Permission(SectionPermissions.SECTION_MANAGE)
   @Post()

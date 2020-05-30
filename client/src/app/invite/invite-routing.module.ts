@@ -10,6 +10,7 @@ const routes: Routes = [
     path: ':inviteId',
     canActivate: [AuthGuard],
     resolve: { invite: InviteResolverService },
+    data: { title: 'Claim invite' },
     component: InviteComponent,
   },
 ];
