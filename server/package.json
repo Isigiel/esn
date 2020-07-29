@@ -31,7 +31,7 @@
     "@nestjs/swagger": "^4.5.7",
     "@nestjs/typeorm": "^7.0.0",
     "@sendgrid/mail": "^7.1.1",
-    "auth0": "^2.25.1",
+    "auth0": "^2.27.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "compression": "^1.7.4",
